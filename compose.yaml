@@ -1,0 +1,15 @@
+services:
+    php-serveur:
+        build: .
+        container_name: php-serveur
+        ports:
+            - 80:80
+        volumes:
+            - ./:/var/www
+        networks:
+            - symfony-network
+        
+    
+networks:
+    symfony-network:
+        driver: bridge
