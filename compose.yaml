@@ -13,3 +13,4 @@ services:
 networks:
     symfony-network:
         driver: bridge
+        name: symfony-network

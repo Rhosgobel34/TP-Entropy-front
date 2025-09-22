@@ -13,3 +13,18 @@ login_page:
     path: /login
     controller: App\Controller\LoginPageController::index
     methods: [GET]
+
+login_page_form:
+    path: /login
+    controller: App\Controller\LoginPageController::form
+    methods: [POST]
+
+register_page:
+    path: /register
+    controller: App\Controller\RegisterPageController::index
+    methods: [GET]
+
+register_page_form:
+    path: /register
+    controller: App\Controller\RegisterPageController::form
+    methods: [POST]

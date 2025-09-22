@@ -18,11 +18,14 @@ class TokenVerifyer implements AccessTokenHandlerInterface
     public function getUserBadgeFrom(string $token): UserBadge
     {
         $response = $this->client->request(
-            'GET',
-            $this->apiUrl . 'verify_token',
+            'POST',
+            $this->apiUrl . 'auth/verify_token',
             [
-                'body' => [
-                    'token' => $token,
+                'json' => [
+                    'Token' => $token,
+                ],
+                'headers' => [
+                    'Content-Type' => 'application/json',
                 ],
             ]
         );
@@ -33,7 +36,6 @@ class TokenVerifyer implements AccessTokenHandlerInterface
             throw new BadCredentialsException('Invalid credentials.');
         }
 
-
-        return new UserBadge($token);
+        return new UserBadge('dummy');
     }
 }

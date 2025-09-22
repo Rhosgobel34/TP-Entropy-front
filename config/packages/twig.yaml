@@ -1,5 +1,7 @@
 twig:
     file_name_pattern: '*.twig'
+    globals:
+        url_api: 'http://127.0.0.1:5000/api/'
 
 when@test:
     twig:
