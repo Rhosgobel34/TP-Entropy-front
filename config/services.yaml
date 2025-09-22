@@ -23,6 +23,14 @@ services:
     App\Utils\TokenVerifyer:
         arguments:
             $apiUrl: '%env(URL_API)%'
+    
+    App\Controller\RegisterPageController:
+        arguments:
+            $apiUrl: '%env(URL_API)%'
+
+    App\Controller\LoginPageController:
+        arguments:
+            $apiUrl: '%env(URL_API)%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

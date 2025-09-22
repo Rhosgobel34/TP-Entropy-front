@@ -1,0 +1,56 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Register{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1>Register</h1>
+
+    {% if app.request.get('error') %}
+        <div class="error">{{ app.request.get('error') | raw }}</div>
+    {% endif %}
+
+    <form method="post" action="/register" data-turbo="false">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" class="form-control" required>
+        </div>
+        <label for="strengthBar" id="strengthBarLabel"></label>
+        <br/>
+        <progress max="4" value="0" id="strengthBar"></progress>
+        <br/>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+    <a href="/login">Login</a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordInput = document.getElementById('password');
+            const strengthBar = document.getElementById('strengthBar');
+            const strengthBarLabel = document.getElementById('strengthBarLabel');
+            passwordInput.addEventListener('input', function() {
+                if (this.value.length > 1) {
+                    fetch('{{ url_api ~ "auth/check_password"}}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(this.value),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        strengthBar.value = data.score;
+                        strengthBarLabel.innerText = data.comment;
+                    });
+                }
+            });
+        });
+    </script>
+{% endblock %}
